@@ -56,8 +56,6 @@ services:
       DB_PORT: 5432
       API_PORT: 3000
       JWT_SECRET: $(JWT_SECRET)
-    expose:
-      - "3000"
     depends_on:
       db:
         condition: service_healthy
