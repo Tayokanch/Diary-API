@@ -5,3 +5,4 @@ CREATE TABLE IF NOT EXISTS diary(
     password VARCHAR(255),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+

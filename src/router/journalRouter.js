@@ -4,9 +4,9 @@ import { generalAuth } from '../middleware/auth.js';
 
 
 const router = express.Router();
-router.post('/create-journal', generalAuth, createJournalController);
-router.get('/get-journal', generalAuth, getJournalsController);
-router.put('/update-journal', generalAuth, updateJournalontroller )
-router.delete('/delete-journal/:journalID', generalAuth, deleteJournalController);
+router.post('/user/create-journal', generalAuth, createJournalController);
+router.get('/user/get-journal', generalAuth, getJournalsController);
+router.put('/user/update-journal', generalAuth, updateJournalontroller )
+router.delete('/user/delete-journal/:journalID', generalAuth, deleteJournalController);
 
 export default router

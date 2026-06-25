@@ -2,20 +2,18 @@ import { createMyJournal, getMyJournal, updateJournal, deleteJournal } from "../
 
 export const createJournalController = async (req, res) => {
     try {
-        const diaryId = req.authUser.id;
-        const diaryName = req.authUser.dairyName
+        const diaryId = req.diaryID;
         const { topic, note } = req.body;
 
         if (!diaryId) throw new Error('Diary not exist, create one');
         if (!topic) return res.status(400).json({ error: 'Topic is missing' });
         if (!note) return res.status(400).json({ error: 'Note is missing' });
-        if (!diaryName) return res.status(400).json({ error: 'DiaryName is missing' });
 
-        const journal = await createMyJournal(diaryId, diaryName, topic, note);
+        const journal = await createMyJournal(diaryId, topic, note);
 
         res.status(201).json({
             message: 'Journal successfully created',
-            result
+            journal
         });
     } catch (err) {
         console.error(err);
@@ -25,7 +23,7 @@ export const createJournalController = async (req, res) => {
 
 export const getJournalsController = async (req, res) => {
     try {
-        const diaryId = req.authUser?.id;
+        const diaryId = req.diaryID;
         if (!diaryId) throw new Error('Dairy not found, create one');
 
         const journals = await getMyJournal(diaryId);

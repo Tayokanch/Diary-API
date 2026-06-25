@@ -7,7 +7,8 @@ dotenv.config();
 export const createMyDiary = async (req, res) => {
   try {
     const { diaryName, email, password } = req.body;
-
+    console.log(diaryName, email, password);
+    
     if (!diaryName || !email || !password) {
       return res.status(400).json({
         error: 'diaryName, email, and password are required',

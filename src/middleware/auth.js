@@ -13,8 +13,8 @@ export const generalAuth = (req, res, next) => {
 
   const token = authHeader.split(' ')[1];
   try {
-    const decodedID = jwt.verify(token, SECRET);
-    req.diaryID = decodedID; 
+    const decodedCredential = jwt.verify(token, SECRET);
+    req.diaryID = decodedCredential.id; 
 
     next();
   } catch (err) {
