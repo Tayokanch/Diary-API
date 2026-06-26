@@ -6,3 +6,5 @@ CREATE TABLE IF NOT EXISTS diary(
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+01_create_diary.sql
+02_create_journal.sql

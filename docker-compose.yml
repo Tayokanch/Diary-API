@@ -1,24 +1,28 @@
-
 services:
 
   # -----------------------
   # PostgreSQL Database
   # -----------------------
-  db:
+  diaryhub-db:
     image: tayokanch/postgres:16
     container_name: diary-hub-db
-    environment:
+    restart: always
+
+    environment: ## This Environment Variable are used at when the container is composed
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: ${DB_NAME}
+
     expose:
-      - ${DB_PORT}
-    restart: always
+      - 5432
+
     volumes:
       - pgdata:/var/lib/postgresql/data
-      - ./migration:/docker-entrypoint-initdb.d
+      - ./migrations:/docker-entrypoint-initdb.d
+
     networks:
       - diaryhub_api_network
+
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${DB_USER}"]
       interval: 5s
@@ -26,30 +30,31 @@ services:
       start_period: 10s
 
   # -----------------------
-  # Notewatch API Instances
+  # API
   # -----------------------
   diaryhub-api:
     build: .
-    environment:
-      DB_HOST: db
-      DB_USER: ${DB_USER}
-      DB_PASSWORD: ${DB_PASSWORD}
-      DB_NAME: ${DB_NAME}
-      INIT_ADMIN_EMAIL: $(INIT_ADMIN_EMAIL)
-      DB_PORT: 5432
-      API_PORT: 3000
-      JWT_SECRET: $(JWT_SECRET)
+    container_name: diaryhub-api
+
+    env_file: # This inject environment variable at runtime
+      - .env
+
     depends_on:
       db:
         condition: service_healthy
+
+    restart: always
+
     networks:
       - diaryhub_api_network
-    restart: always
+
     healthcheck:
       test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:3000/health || exit 1"]
       interval: 5s
       retries: 5
       start_period: 20s
+
+# -----------------------
 # Volumes
 # -----------------------
 volumes:
@@ -60,5 +65,4 @@ volumes:
 # -----------------------
 networks:
   diaryhub_api_network:
-    external: true
-
+    driver: bridge
