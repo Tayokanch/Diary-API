@@ -97,6 +97,8 @@ DiaryHub API runs as **three identical stateless replicas** behind Nginx.
 
 Most endpoints require authentication using a **Bearer JWT token**.
 
+## BaseURL
+  `https://diaryhubapi.tayolabs.dev`
 ---
 
 ## 1. Health Check
