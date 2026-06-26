@@ -15,7 +15,6 @@ export const generalAuth = (req, res, next) => {
   try {
     const decodedCredential = jwt.verify(token, SECRET);
     req.diaryID = decodedCredential.id; 
-
     next();
   } catch (err) {
     return res.status(401).json({ message: 'Access token expired or invalid' });

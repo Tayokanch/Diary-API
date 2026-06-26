@@ -38,9 +38,10 @@ export const getJournalsController = async (req, res) => {
 
 export const updateJournalontroller = async (req, res) => {
   try {
-    const { journalID, topic, note} = req.body;
 
-    if (!journalID || !topic || note) {
+    const { journalID, topic, note} = req.body;
+    
+    if (!journalID || !topic || !note) {
       return res.status(400).json({
         error: 'journalID, topic, and note are required'
       });
