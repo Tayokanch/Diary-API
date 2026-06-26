@@ -1,5 +1,8 @@
 # 📓 DiaryHub Platform – Docker, Nginx & CI/CD System
 
+![Architecture Diagram](/src/doc//deploy.png) 
+
+
 A containerised, microservices-based diary application platform built with **Node.js, Docker, Nginx reverse proxy, PostgreSQL, and CI/CD automation**.  
 Designed for scalable deployment, service isolation, and production-like infrastructure practice.
 

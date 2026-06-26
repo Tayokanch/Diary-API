@@ -2,7 +2,7 @@
 
  
 
-![Architecture Diagram](/src/doc//deploy.png) 
+![Architecture Diagram](/src/doc/diaryhub.gif) 
 
  
 
