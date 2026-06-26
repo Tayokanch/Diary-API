@@ -34,8 +34,6 @@ services:
   # -----------------------
   diaryhub-api:
     build: .
-    container_name: diaryhub-api
-
     environment:
       DB_USER: ${DB_USER}
       DB_PASSWORD: ${DB_PASSWORD}
