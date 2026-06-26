@@ -24,7 +24,7 @@ services:
       - diaryhub_api_network
 
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U diaryadmin"]
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER}"]
       interval: 5s
       retries: 5
       start_period: 10s
