@@ -148,7 +148,7 @@ Nginx communicates with the API services over Docker’s private bridge network,
 
 ## 🧪 How to Test the APPLICATION 
 
-The NoteWatch API is securely available over HTTPS at https://notewatch.tayolabs.dev, with TLS managed by Cloudflare and requests routed through Nginx to the backend services. 
+The DiaryHUB API is securely available over HTTPS at https://notewatch.tayolabs.dev, with TLS managed by Cloudflare and requests routed through Nginx to the backend services. 
 
  
 
@@ -168,23 +168,18 @@ You can test the endpoints using **Postman**, **insomnia**, **curl**, or any HTT
 
 Most endpoints require authentication using a **Bearer Access Token**. 
 
- 
+1. chech API health ('/health')
 
-1. Create a user account (`/user/signup`) 
+2. Create a diary (`/user/create-diary`) 
 
-2. Log in (`/user/login`) 
+3. Log in (`/user/access-diary`  ) returns an `Authorization Token` 
 
-3. Use the returned `accessToken` in the `Authorization` header: 
-
- 
-
- 
 
 **Request Body** 
 
 ```json 
 
-1. POST /user/signup 
+1. POST /user/create-diary
 
 { 
 
@@ -200,7 +195,7 @@ Most endpoints require authentication using a **Bearer Access Token**.
 
  
 
-2. POST /user/login 
+2. POST /user/access-diary
 
 { 
 
@@ -215,8 +210,9 @@ Most endpoints require authentication using a **Bearer Access Token**.
 Expected Response 
 
 { 
+"message": "string",
 
-"accessToken": "JWT_ACCESS_TOKEN" 
+"token": "JWT_ACCESS_TOKEN" 
 
 } 
 
@@ -226,49 +222,40 @@ Expected Response
 
  
 
-3. POST /create-note 
+3. POST /user/create-journal
 
 Authorization: Bearer <ACCESS_TOKEN> 
 
-{ 
-
-"title": "My First Note" 
-
-} 
-
+Body
+  {
+    "topic": "string",
+    "note": "string"
+}
  
 
  
 
-4. GET /get-notes 
+4. GET /user/get-journal
 
 Authorization: Bearer <JWT_ACCESS_TOKEN> 
 
  
 
-5. PUT /update-note 
+5. PUT /user/update-journal`
 
 Authorization: Bearer <JWT_ACCESS_TOKEN> 
 
-{ 
-
-"noteID": "NOTE_ID", 
-
-"title": "Updated Note Title" 
-
-} 
-
+{
+"journalID": int,
+"topic": "string",
+"note": "string"
+}
  
 
-6. DELETE /delete-note/{noteID} 
+6. DELETE /user/delete-journal/{journalID} 
 
 Authorization: Bearer <JWT_ACCESS_TOKEN> 
 
- 
-
-7. GET /my-logs 
-
-Authorization: Bearer <JWT_ACCESS_TOKEN> 
 
 ``` 
 
