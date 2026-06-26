@@ -40,7 +40,7 @@ services:
       - .env
 
     depends_on:
-      db:
+      diaryhub-db:
         condition: service_healthy
 
     restart: always
